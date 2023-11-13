@@ -4,19 +4,10 @@ jobs:
   zap_scan:
     runs-on: ubuntu-latest
     name: Scan ZAP website
-    container:
-      image: syncthing/syncthing
-      ports:
-        - 8384
-      volumes:
-        - my_docker_volume:/volume_mount
-      options: --cpus 1
     steps:
       - name: ZAP Scan
         uses: zaproxy/action-full-scan@v0.8.0
         continue-on-error: true
-        env:
-          PATH: /usr/bin/
         with:
           target: 'http://127.0.0.1:8384/'
       - name: Archive zap results
